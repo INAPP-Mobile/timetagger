@@ -42,9 +42,15 @@
 #
 # Upstream: TimeTagger v26.1.3 (GPL-3.0), image pinned by manifest
 # digest, verified 2026-11-05 via the GitHub Packages API
-# (multi-arch manifest-list digest below).
+# (multi-arch manifest-list digest below). NOTE: the FROM uses the
+# digest WITHOUT a tag — Railpack 0.43.0 fails to detect a Dockerfile
+# whose FROM carries both a tag and a digest (redeploys die in the
+# plan phase with "could not determine how to build"); the
+# digest-only form builds under both the Dockerfile builder and
+# Railpack (verified 2026-11-05 — FileGator's digest-only FROM is
+# the precedent).
 
-FROM ghcr.io/almarklein/timetagger:v26.1.3@sha256:04797c616a25760ee94b352273535a516881ca820e507aee9abf7a63e5768502
+FROM ghcr.io/almarklein/timetagger@sha256:04797c616a25760ee94b352273535a516881ca820e507aee9abf7a63e5768502
 
 USER root
 
